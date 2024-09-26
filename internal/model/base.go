@@ -173,6 +173,7 @@ type Field struct {
 	GORMTag          field.GormTag
 	CustomGenType    string
 	Relation         *field.Relation
+	SpecType         string
 }
 
 // Tags ...
@@ -217,6 +218,13 @@ func (m *Field) GenType() string {
 	default:
 		return "Field"
 	}
+}
+
+func (m *Field) GetType() string {
+	if m.SpecType != "" {
+		return m.SpecType
+	}
+	return m.Type
 }
 
 // EscapeKeyword escape keyword
