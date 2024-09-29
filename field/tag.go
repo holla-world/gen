@@ -9,7 +9,7 @@ const (
 	TagKeyGorm = "gorm"
 	TagKeyJson = "json"
 
-	//gorm tag
+	// gorm tag
 	TagKeyGormColumn        = "column"
 	TagKeyGormType          = "type"
 	TagKeyGormPrimaryKey    = "primaryKey"
@@ -131,7 +131,14 @@ func tagKeys(tag Tag) []string {
 	for k := range tag {
 		keys = append(keys, k)
 	}
-	return keySort(keys)
+	ks := keySort(keys)
+	for i, s := range ks {
+		// 将json交换到最前面
+		if s == "json" {
+			ks[0], ks[i] = ks[i], ks[0]
+		}
+	}
+	return ks
 }
 
 func gormKeys(tag GormTag) []string {
