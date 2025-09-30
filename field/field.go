@@ -87,3 +87,7 @@ func (field Field) toSlice(values ...driver.Valuer) []interface{} {
 	}
 	return slice
 }
+
+func (field Field) Col() clause.Column {
+	return field.col
+}
